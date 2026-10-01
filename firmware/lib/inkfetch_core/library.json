@@ -1,0 +1,12 @@
+{
+  "name": "inkfetch_core",
+  "version": "0.1.0",
+  "description": "Hardware-independent logic of the inkfetch firmware (testable on a PC)",
+  "license": "MIT",
+  "frameworks": "*",
+  "platforms": "*",
+  "dependencies": [
+    { "owner": "bitbank2", "name": "PNGdec", "version": "1.1.6" },
+    { "owner": "bblanchon", "name": "ArduinoJson", "version": "7.4.3" }
+  ]
+}
