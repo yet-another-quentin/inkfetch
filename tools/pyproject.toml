@@ -1,0 +1,20 @@
+[project]
+name = "inkfetch"
+version = "0.1.0"
+description = "Prepare and serve pictures for inkfetch e-paper frames"
+license = "MIT"
+requires-python = ">=3.10"
+dependencies = ["pillow>=10.1"]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[project.scripts]
+inkfetch = "inkfetch.cli:main"
+
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
