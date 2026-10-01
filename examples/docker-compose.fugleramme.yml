@@ -1,0 +1,38 @@
+# inkfetch next to an existing fugleramme install: the proxy turns fugleramme's
+# full-colour collage into the PNG an inkfetch frame displays.
+#
+#   docker compose -f examples/docker-compose.fugleramme.yml up -d
+#
+# Point the frame's image URL at http://<this host>:8081/frame.png.
+# Add these services to fugleramme's own compose file instead if you use it
+# (https://github.com/arnegiacomo/fugleramme/blob/main/examples/docker-compose.yml).
+
+services:
+  fugleramme:
+    image: ghcr.io/arnegiacomo/fugleramme:latest
+    restart: unless-stopped
+    environment:
+      FUGLERAMME_DETECTOR_URL: ${FUGLERAMME_DETECTOR_URL:-http://birdnet-go.local:8080}
+      TZ: ${TZ:-Europe/Paris}
+    ports:
+      - "8080:8080"
+    volumes:
+      - fugleramme:/data
+
+  inkfetch:
+    build: ../tools
+    restart: unless-stopped
+    environment:
+      TZ: ${TZ:-Europe/Paris}  # quiet hours are in local time
+    command:
+      - serve
+      - --source=http://fugleramme:8080/collage.png
+      - --quiet-hours=22-07
+      # - --token=${INKFETCH_TOKEN}
+    ports:
+      - "8081:8080"
+    depends_on:
+      - fugleramme
+
+volumes:
+  fugleramme:
