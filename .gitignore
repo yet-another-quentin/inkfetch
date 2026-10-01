@@ -1,0 +1,11 @@
+# PlatformIO
+firmware/.pio/
+firmware/include/secrets.h
+
+# Python
+__pycache__/
+*.egg-info/
+.venv/
+.pytest_cache/
+build/
+dist/
